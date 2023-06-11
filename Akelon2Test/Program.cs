@@ -9,8 +9,18 @@ namespace Akelon3Test
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите путь до файла с данными:");
-            string filePath = Console.ReadLine();
+            string filePath;
+
+            while (true)
+            {
+                Console.Write("Введите путь до файла с данными: ");
+                filePath = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(filePath) && File.Exists(filePath))
+                    break;
+
+                Console.WriteLine("Некорректный путь к файлу. Попробуйте снова.");
+            }
 
             using (var workbook = new XLWorkbook(filePath))
             {
